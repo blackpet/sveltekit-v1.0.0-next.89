@@ -12,6 +12,7 @@ module.exports = {
 	],
 
 	kit: {
+		adapter: require('@sveltejs/adapter-netlify')(),
 		// hydrate the <div id="svelte"> element in src/app.html
 		target: '#svelte',
 		vite: {
@@ -20,6 +21,6 @@ module.exports = {
 					$actions: resolve(__dirname, './src/actions'),
 				}
 			}
-		}
+		},
 	}
 };

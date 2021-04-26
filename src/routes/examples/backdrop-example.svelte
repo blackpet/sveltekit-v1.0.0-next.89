@@ -1,6 +1,6 @@
 <script>
-  import Backdrop from '$lib/components/Backdrop.svelte';
-  import Modal from '$lib/components/Modal.svelte';
+  import Backdrop from '$lib/Components/Backdrop.svelte';
+  import Modal from '$lib/Components/Modal.svelte';
   import {clickOutside} from "$actions";
   import {fade, fly} from 'svelte/transition';
   let open = false;
