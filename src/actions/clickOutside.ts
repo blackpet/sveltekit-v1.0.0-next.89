@@ -1,3 +1,4 @@
+
 export function clickOutside(node, {enabled: initialEnabled, cb}) {
   const handleOutsideClick = ({target}) => {
     if(!node.contains(target)) {
@@ -16,7 +17,7 @@ export function clickOutside(node, {enabled: initialEnabled, cb}) {
   update({enabled: initialEnabled});
   return {
     update,
-    destory() {
+    destroy() {
       window.removeEventListener('click', handleOutsideClick);
     }
   };
