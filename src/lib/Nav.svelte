@@ -19,7 +19,7 @@
 			<h2>components</h2>
 			<ul>
 				<li><a href="/examples/backdrop-example">Backdrop / Modal</a></li>
-				<li><a>test 2</a></li>
+				<li><a href="/calendar/timegrid-example">Timegrid</a></li>
 				<li><a>test 3</a></li>
 			</ul>
 		</li>
