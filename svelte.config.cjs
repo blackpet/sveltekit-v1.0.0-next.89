@@ -19,6 +19,7 @@ module.exports = {
 			resolve: {
 				alias: {
 					$actions: resolve(__dirname, './src/actions'),
+					$types: resolve(__dirname, './src/types'),
 				}
 			}
 		},
