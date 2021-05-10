@@ -6,3 +6,9 @@ export interface TimeSlot {
   fulltime: string;
   oclock: boolean;
 }
+
+export interface Event {
+  start: string;
+  duration: number;
+  title: string;
+}

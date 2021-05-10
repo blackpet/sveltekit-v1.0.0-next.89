@@ -1,6 +1,6 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import type {TimeSlot} from '$types/Calendar';
+  import type {TimeSlot, Event} from '$types/Calendar';
   import {onMount} from 'svelte';
 
   /**
@@ -16,6 +16,9 @@
    *  - A minutes that multiplies to 60(min)
    */
   export let slotDuration = 20;
+
+  export let events: Array<Event>;
+  console.log('events', events);
 
   export let date = dayjs();
 
@@ -66,8 +69,12 @@
     <!-- slot -->
     {#each slots as slot}
       <div class="flex slot" class:oclock={slot.oclock}>
-        <div class="w-16 text-sm text-right">{slot.oclock ? slot.label : ''}</div>
-        <div class="flex-1 bg-green-200"></div>
+        <div class="w-16 text-xs sm:text-sm text-right pr-1">{slot.oclock ? slot.label : ''}</div>
+        <div class="flex-1 bg-green-200 relative">
+          {#each events.filter(evt => slot.fulltime === evt.start) as event}
+          <div class="event" style="height: {event.duration / slotDuration * 1.25}rem;">{event.title}</div>
+          {/each}
+        </div>
       </div>
     {/each}
     <!-- // slot -->
@@ -81,5 +88,8 @@
   }
   .slot.oclock {
     @apply border-t border-gray-400;
+  }
+  .event {
+    @apply absolute shadow-md z-10 h-5 w-[97%] sm:w-[99%] text-sm sm:text-base ml-1 rounded bg-blue-500 text-white p-1;
   }
 </style>
