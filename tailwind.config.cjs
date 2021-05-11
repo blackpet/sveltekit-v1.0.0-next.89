@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
 	mode: "jit",
 	purge: [
@@ -8,6 +10,7 @@ module.exports = {
 			colors: {
 				sick: '#ff0000',
 				black: '#393939',
+				fuchsia: colors.fuchsia,
 			},
 			fontSize: {
 				'4.5xl': '2.5rem',
