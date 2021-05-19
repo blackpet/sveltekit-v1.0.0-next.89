@@ -1,25 +1,27 @@
 <script>
-  import Backdrop from '$lib/Components/Backdrop.svelte';
-  import Modal from '$lib/Components/Modal.svelte';
+  import Backdrop from '../../lib/Components/Backdrop.svelte';
+  import Modal from '../../lib/Components/Modal.svelte';
   import {clickOutside} from "$actions";
   import {fade, fly} from 'svelte/transition';
   let open = false;
-  let open2 = false; // for Backdrop
-  let open3 = false; // for Modal
+  let backdrop1; // for Backdrop
+  let modal1; // for Modal
 </script>
 
 <div>
-  <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
-          on:click|stopPropagation={() => open = true}>show modal</button>
-  <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
-          on:click|stopPropagation={() => open2 = true}>backdrop</button>
-  <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
-          on:click|stopPropagation={() => open3 = true}>Modal</button>
 
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
+  <div>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
+            on:click|stopPropagation={() => open = true}>show modal</button>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
+            on:click|stopPropagation={backdrop1.open}>backdrop</button>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
+            on:click|stopPropagation={modal1.open}>Modal</button>
+  </div>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
@@ -47,9 +49,9 @@
   </div>
 {/if}
 
-<Backdrop bind:open={open2} />
-<Modal bind:open={open3}>
+<Backdrop bind:this={backdrop1} />
+<Modal bind:this={modal1}>
   <div class="w-80 p-8 text-center">
-    <button on:click={() => open3 = false}>close modal</button>
+    <button on:click={modal1.close}>close modal</button>
   </div>
 </Modal>
