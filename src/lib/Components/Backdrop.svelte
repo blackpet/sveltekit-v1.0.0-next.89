@@ -1,6 +1,10 @@
 <script>
   import {fade} from 'svelte/transition';
-  export let open = false;
+
+  export const open = () => _open = true;
+  export const close = () => _open = false;
+
+  let _open = false;
 
   // prevent background body scroll
   function freezeBackground(node) {
@@ -14,14 +18,14 @@
   }
 </script>
 
-{#if open}
+{#if _open}
   <div class="fixed inset-0 grid place-content-center"
        use:freezeBackground>
     <div class="absolute inset-0 opacity-50 inset-0 bg-gray-800 h-full w-full"
          transition:fade={{duration: 100}}></div>
     <slot>
       <div class="z-10 bg-white rounded-lg shadow-xl text-center px-8 py-4">
-        <button on:click={() => open = false}>close</button>
+        <button on:click={close}>close</button>
       </div>
     </slot>
   </div>
