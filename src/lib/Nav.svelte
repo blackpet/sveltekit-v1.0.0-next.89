@@ -20,7 +20,7 @@
 			<ul>
 				<li><a href="/examples/backdrop-example">Backdrop / Modal</a></li>
 				<li><a href="/calendar/timegrid-example">Timegrid</a></li>
-				<li><a>test 3</a></li>
+				<li><a href="/calendar/singleline-calendar-example">Single-line Calendar</a></li>
 			</ul>
 		</li>
 		<li class='card'>

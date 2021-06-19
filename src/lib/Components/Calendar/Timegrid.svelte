@@ -51,9 +51,9 @@
 
   const users = [
     {name: '홍길동', color: 'red'},
-    {name: '강감찬', color: 'yellow'},
-    {name: '김진영', color: 'fuchsia'},
-    {name: '심재호', color: 'green'}
+    // {name: '강감찬', color: 'yellow'},
+    // {name: '김진영', color: 'fuchsia'},
+    // {name: '심재호', color: 'green'}
   ];
 </script>
 
