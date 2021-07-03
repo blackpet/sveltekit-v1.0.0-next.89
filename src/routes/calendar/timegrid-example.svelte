@@ -1,7 +1,8 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import Timegrid from "$lib/Components/Calendar/Timegrid.svelte";
+  import Timegrid from "$lib/components/Calendar/Timegrid.svelte";
   import type {Event} from '$types/Calendar';
+  import SingleLineWeek from "../../lib/components/Calendar/SingleLineWeek.svelte";
 
   const today = dayjs();
   const events: Array<Event> = [
@@ -10,4 +11,5 @@
   ];
 </script>
 
+<SingleLineWeek weeks={4} />
 <Timegrid {events} />
