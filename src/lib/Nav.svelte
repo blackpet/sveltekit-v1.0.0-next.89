@@ -19,6 +19,7 @@
 			<h2>components</h2>
 			<ul>
 				<li><a href="/examples/backdrop-example">Backdrop / Modal</a></li>
+				<li><a href="/calendar">Calendar Full ver.</a></li>
 				<li><a href="/calendar/timegrid-example">Timegrid</a></li>
 				<li><a href="/calendar/singleline-calendar-example">Single-line Calendar</a></li>
 			</ul>
