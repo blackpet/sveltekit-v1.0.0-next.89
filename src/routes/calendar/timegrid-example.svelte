@@ -11,5 +11,4 @@
   ];
 </script>
 
-<SingleLineWeek weeks={4} />
 <Timegrid {events} />

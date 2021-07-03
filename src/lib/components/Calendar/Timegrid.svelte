@@ -1,7 +1,9 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import type {TimeSlot, Event} from '$types/Calendar';
+  import type {TimeSlot, CalendarEvent} from '$types/Calendar';
   import {onMount} from 'svelte';
+  import store from '$stores/calendar-store';
+  import type {CalendarStore} from '../../../stores/calendar-store';
 
   /**
    * @slotStart 'HH:mm'
@@ -17,18 +19,23 @@
    */
   export let slotDuration = 20;
 
-  export let events: Array<Event>;
+  export let events: Array<CalendarEvent>;
   console.log('events', events);
 
-  export let date = dayjs();
+  let date = dayjs(new Date());
+  $: dateStr = date.format('MM/DD');
+  $: console.log('date', date.format());
 
   date = date.second(0).minute(0).hour(0);
-  const dateStr = date.format('MM/DD');
   const slotSize = (24 * 60) / slotDuration;
 
   let slots: Array<TimeSlot> = [];
   onMount(() => {
     slots = generateSlots();
+
+    return store.subscribe((s: store) => {
+      date = dayjs(s.date);
+    });
   });
 
   function generateSlots(): Array<TimeSlot> {

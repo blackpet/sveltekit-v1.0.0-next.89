@@ -1,8 +1,19 @@
 <script lang="ts">
   import moment from 'moment';
-  import CalendarStore from '../../../stores/calendar-store'
+  import store from '$stores/calendar-store';
+  import type {CalendarStore} from '../../../stores/calendar-store';
+
+  import {onMount} from 'svelte';
+  import dayjs from 'dayjs';
 
   export let weeks = 4;
+  let date = new Date();
+
+  onMount(() => {
+    return store.subscribe((s: CalendarStore) => {
+      date = s.date;
+    });
+  });
 
   const startOfWeekBefore = moment().startOf('week').subtract(1, 'd');
   const weeksDate = Array.from({length: weeks}) // 4 weeks
@@ -19,7 +30,9 @@
             saturday: dt.day() === 6,
           }
         })
-    )
+    );
+
+  $: current = (date) => moment($store.date).isSame(date, 'day');
 </script>
 
 <div class="week-slot">
@@ -29,7 +42,8 @@
         <div class:sunday={day.sunday}
              class:saturday={day.saturday}
              class:today={day.today}
-             class:current={CalendarStore.current(day.date)}>
+             class:current={current(day.date)}
+             on:click={() => store.setDate(day.date)}>
           {day.short}
         </div>
       {/each}
@@ -52,7 +66,7 @@
   }
   .week > div {
     @apply relative text-sm bg-gray-200
-    rounded-full p-2 w-12 text-center
+    rounded-full p-2 w-12 text-center cursor-pointer
     border-2 border-transparent;
   }
   .week > .sunday {@apply bg-red-300;}

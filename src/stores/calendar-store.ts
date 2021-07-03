@@ -1,7 +1,7 @@
 import {writable, get} from 'svelte/store';
 import dayjs, {Dayjs} from 'dayjs';
 
-type CalendarStore = {
+export type CalendarStore = {
   date: Date;
 }
 const defaultStore = {
@@ -23,6 +23,7 @@ const getDayjs = (): Dayjs => dayjs(getDate());
 export default {
   subscribe: calendarStore.subscribe,
   getDate, // selected date
-  setDate: (date) => $store().date = date, // select date
+  getDayjs,
+  setDate: (date) => calendarStore.update(s => ({...s, date})), // select date
   current: (date) => getDayjs().isSame(date, 'day'),
 };
