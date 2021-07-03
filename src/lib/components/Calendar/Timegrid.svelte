@@ -1,7 +1,9 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import type {TimeSlot, Event} from '$types/Calendar';
+  import type {TimeSlot, CalendarEvent} from '$types/Calendar';
   import {onMount} from 'svelte';
+  import store from '$stores/calendar-store';
+  import type {CalendarStore} from '../../../stores/calendar-store';
 
   /**
    * @slotStart 'HH:mm'
@@ -17,18 +19,23 @@
    */
   export let slotDuration = 20;
 
-  export let events: Array<Event>;
+  export let events: Array<CalendarEvent>;
   console.log('events', events);
 
-  export let date = dayjs();
+  let date = dayjs(new Date());
+  $: dateStr = date.format('MM/DD');
+  $: console.log('date', date.format());
 
   date = date.second(0).minute(0).hour(0);
-  const dateStr = date.format('MM/DD');
   const slotSize = (24 * 60) / slotDuration;
 
   let slots: Array<TimeSlot> = [];
   onMount(() => {
     slots = generateSlots();
+
+    return store.subscribe((s: store) => {
+      date = dayjs(s.date);
+    });
   });
 
   function generateSlots(): Array<TimeSlot> {
@@ -58,18 +65,6 @@
 </script>
 
 <div class="h-screen bg-red-200 flex flex-col">
-  <div class="bg-gray-100">
-    <button>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
-    <button>
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
-  </div>
   <div class="bg-white">{dateStr}</div>
   <div class="h-full bg-indigo-200 overflow-hidden overflow-y-auto">
 

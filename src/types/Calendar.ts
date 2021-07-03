@@ -7,7 +7,7 @@ export interface TimeSlot {
   oclock: boolean;
 }
 
-export interface Event {
+export interface CalendarEvent {
   start: string;
   duration: number;
   title: string;
