@@ -20,7 +20,7 @@
 	}
 
 	h1 {
-		@apply text-red-600 uppercase text-6xl font-thin
+		@apply text-red-600 uppercase text-3xl md:text-6xl font-thin
 		leading-tight my-8 mx-auto max-w-xs;
 	}
 

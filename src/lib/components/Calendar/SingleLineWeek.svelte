@@ -1,7 +1,7 @@
 <script lang="ts">
   import moment from 'moment';
   import store from '$stores/calendar-store';
-  import type {CalendarStore} from '../../../stores/calendar-store';
+  import type {CalendarStore} from '$stores/calendar-store';
 
   import {onMount} from 'svelte';
   import dayjs from 'dayjs';

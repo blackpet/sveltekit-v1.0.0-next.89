@@ -3,6 +3,7 @@
   import {clickOutside} from "../../actions";
   import Backdrop from './Backdrop.svelte';
 
+  export let title = '';
   export let backdrop;
   export const open = () => {
     _open = true;
@@ -18,9 +19,20 @@
 </script>
 
 <Backdrop bind:this={backdrop}>
-  <div class="z-10 bg-white rounded-lg shadow-xl"
+  <div class="relative bg-white rounded-lg shadow-xl"
        use:clickOutside={{enabled: _open, cb: backdrop.close}}
        transition:fly={{duration: 100, y: -50, opacity: 0.3}}>
-    <slot />
+    <div class="h-8 py-2 text-center text-xl sm:text-2xl font-medium">
+      {title}
+    </div>
+    <div class="absolute right-0 top-0 p-2 cursor-pointer"
+         on:click={close}>
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </div>
+    <div class="p-4">
+      <slot />
+    </div>
   </div>
 </Backdrop>

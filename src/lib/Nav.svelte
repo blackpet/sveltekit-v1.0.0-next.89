@@ -1,5 +1,5 @@
 <nav>
-	<ul class='grid grid-cols-3 gap-4'>
+	<ul class='grid md:grid-cols-3 gap-4'>
 		<li class='card'>
 			<h2>layouts</h2>
 			<ul>
