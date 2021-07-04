@@ -17,4 +17,10 @@
     , 'Segoe UI', Oxygen, Ubuntu, Cantarell
     , 'Open Sans', 'Helvetica Neue', sans-serif;
   }
+
+  input {
+    @apply border border-indigo-400 appearance-none rounded
+    focus:ring-1 focus:ring-indigo-400
+    p-1 px-2;
+  }
 }

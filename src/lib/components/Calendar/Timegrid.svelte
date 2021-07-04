@@ -1,9 +1,11 @@
 <script lang="ts">
   import dayjs from 'dayjs';
-  import type {TimeSlot, CalendarEvent} from '$types/Calendar';
-  import {onMount} from 'svelte';
+  import type {CalendarEvent, TimeSlot} from '$types/Calendar';
+  import {onMount, createEventDispatcher} from 'svelte';
   import store from '$stores/calendar-store';
-  import type {CalendarStore} from '../../../stores/calendar-store';
+  import type {CalendarStore} from '$stores/calendar-store';
+
+  const dispatch = createEventDispatcher();
 
   /**
    * @slotStart 'HH:mm'
@@ -33,7 +35,7 @@
   onMount(() => {
     slots = generateSlots();
 
-    return store.subscribe((s: store) => {
+    return store.subscribe((s: CalendarStore) => {
       date = dayjs(s.date);
     });
   });
@@ -57,16 +59,23 @@
   }
 
   const users = [
-    {name: '홍길동', color: 'red'},
+    {name: '홍길동', color: 'gray'},
     // {name: '강감찬', color: 'yellow'},
     // {name: '김진영', color: 'fuchsia'},
     // {name: '심재호', color: 'green'}
   ];
+
+  function slotClick(user, slot) {
+    dispatch('slotClick', {user, slot});
+  }
+  function eventClick(user, event) {
+    dispatch('eventClick', {user, event});
+  }
 </script>
 
-<div class="h-screen bg-red-200 flex flex-col">
+<div class="bg-red-200 flex flex-col">
   <div class="bg-white">{dateStr}</div>
-  <div class="h-full bg-indigo-200 overflow-hidden overflow-y-auto">
+  <div class="h-full bg-indigo-200">
 
     <div class="!sm:w-screen">
       <!-- users -->
@@ -83,10 +92,12 @@
             {slot.oclock ? slot.label : ''}
           </div>
           <div class="flex flex-1 bg-green-200">
-            {#each users as name}
-              <div class="{name.color} flex-1 relative">
+            {#each users as user}
+              <div class="{user.color} flex-1 relative py-0.5"
+                   on:click|stopPropagation={() => slotClick(user, slot)}>
                 {#each events.filter(evt => slot.fulltime === evt.start) as event}
-                <div class="event" style="height: {event.duration / slotDuration * 1.25}rem;">{event.title}</div>
+                <div class="event" style="height: {(event.duration / slotDuration * 1.5) - 0.25}rem;"
+                     on:click|stopPropagation={() => eventClick(user, event)}>{event.title}</div>
                 {/each}
               </div>
             {/each}
@@ -101,19 +112,24 @@
 
 <style lang="scss">
   .slot {
-    @apply border-t border-gray-300 h-5;
+    @apply border-t border-gray-300 h-6;
   }
   .slot.oclock {
     @apply border-t border-gray-400;
   }
   .event {
-    @apply absolute shadow-md z-10 h-5 w-[97%] sm:w-[99%] text-sm sm:text-base ml-1 rounded bg-blue-500 text-white p-1;
+    @apply absolute shadow-md z-10 h-6 w-[97%] sm:w-[99%] text-sm sm:text-base ml-1 rounded bg-blue-500 text-white p-1;
   }
 
   .user.red {@apply bg-red-300;}
   .red {
     @apply bg-red-100;
     .event {@apply bg-red-500;}
+  }
+  .user.gray {@apply bg-gray-300;}
+  .gray {
+    @apply bg-gray-100;
+    .event {@apply bg-blue-500;}
   }
   .user.fuchsia {@apply bg-fuchsia-300;}
   .fuchsia {
