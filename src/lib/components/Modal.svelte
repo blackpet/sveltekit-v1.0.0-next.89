@@ -5,6 +5,7 @@
 
   export let title = '';
   export let backdrop;
+  export let classes;
   export const open = () => {
     _open = true;
     backdrop.open();
@@ -19,7 +20,7 @@
 </script>
 
 <Backdrop bind:this={backdrop}>
-  <div class="relative bg-white rounded-lg shadow-xl"
+  <div class="{classes} relative bg-white rounded-lg shadow-xl"
        use:clickOutside={{enabled: _open, cb: backdrop.close}}
        transition:fly={{duration: 100, y: -50, opacity: 0.3}}>
     <div class="h-8 py-2 text-center text-xl sm:text-2xl font-medium">

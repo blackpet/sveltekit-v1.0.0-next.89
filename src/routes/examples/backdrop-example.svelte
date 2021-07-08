@@ -50,8 +50,9 @@
 {/if}
 
 <Backdrop bind:this={backdrop1} />
-<Modal bind:this={modal1}>
+<Modal bind:this={modal1} classes="max-w-3xl">
   <div class="w-80 p-8 text-center">
     <button on:click={modal1.close}>close modal</button>
   </div>
+  <div class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis fuga hic itaque nemo nihil nobis repellat sapiente, voluptatem. At debitis distinctio facilis, incidunt laborum maxime officiis perspiciatis praesentium tempora unde?</div>
 </Modal>
