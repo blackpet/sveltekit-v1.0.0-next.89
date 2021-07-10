@@ -3,9 +3,12 @@
   import Modal from '../../lib/components/Modal.svelte';
   import {clickOutside} from "$actions";
   import {fade, fly} from 'svelte/transition';
+  import ModalInset from "./ModalInset.svelte";
+
   let open = false;
   let backdrop1; // for Backdrop
   let modal1; // for Modal
+  let modal2; // for Modal within component
 </script>
 
 <div>
@@ -21,6 +24,8 @@
             on:click|stopPropagation={backdrop1.open}>backdrop</button>
     <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
             on:click|stopPropagation={modal1.open}>Modal</button>
+    <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
+            on:click|stopPropagation={() => modal2.open({p1:1, p2:2})}>Modal2 with param</button>
   </div>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
@@ -55,4 +60,8 @@
     <button on:click={modal1.close}>close modal</button>
   </div>
   <div class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis fuga hic itaque nemo nihil nobis repellat sapiente, voluptatem. At debitis distinctio facilis, incidunt laborum maxime officiis perspiciatis praesentium tempora unde?</div>
+</Modal>
+
+<Modal bind:this={modal2} let:param classes="max-w-3xl">
+  <ModalInset {param} />
 </Modal>

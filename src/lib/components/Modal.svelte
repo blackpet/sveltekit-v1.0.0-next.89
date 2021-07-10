@@ -6,7 +6,8 @@
   export let title = '';
   export let backdrop;
   export let classes;
-  export const open = () => {
+  export const open = (_param = undefined) => {
+    param = _param;
     _open = true;
     backdrop.open();
   }
@@ -15,6 +16,7 @@
     backdrop.close();
   }
 
+  let param;
   let _open = false;
 
 </script>
@@ -33,7 +35,7 @@
       </svg>
     </div>
     <div class="p-4">
-      <slot />
+      <slot {param} />
     </div>
   </div>
 </Backdrop>
