@@ -21,11 +21,11 @@
     <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
             on:click|stopPropagation={() => open = true}>show modal</button>
     <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
-            on:click|stopPropagation={backdrop1.open}>backdrop</button>
+            on:click={backdrop1.open}>backdrop</button>
     <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
-            on:click|stopPropagation={modal1.open}>Modal</button>
+            on:click={modal1.open}>Modal</button>
     <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded px-4 py-2 tracking-wider"
-            on:click|stopPropagation={() => modal2.open({p1:1, p2:2})}>Modal2 with param</button>
+            on:click={(e) => modal2.open(e, {p1:1, p2:2})}>Modal2 with param</button>
   </div>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
   <p class="text-2xl">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium animi culpa dolore ducimus illo iusto laboriosam modi perspiciatis, quaerat quas quos reiciendis, repellendus soluta suscipit velit? Itaque nam suscipit voluptates?</p>
