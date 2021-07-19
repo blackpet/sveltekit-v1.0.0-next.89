@@ -5,7 +5,7 @@
 
   export let title = '';
   export let backdrop;
-  export let classes;
+  export let classes = '';
   export const open = (_param = undefined) => {
     param = _param;
     _open = true;
@@ -22,7 +22,7 @@
 </script>
 
 <Backdrop bind:this={backdrop}>
-  <div class="{classes} relative bg-white rounded-lg shadow-xl"
+  <div class="{classes} relative max-h-[90vh] flex flex-col bg-white rounded-lg shadow-xl"
        use:clickOutside={{enabled: _open, cb: backdrop.close}}
        transition:fly={{duration: 100, y: -50, opacity: 0.3}}>
     <div class="h-8 py-2 text-center text-xl sm:text-2xl font-medium">
@@ -34,7 +34,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </div>
-    <div class="p-4">
+    <div class="flex-1 overflow-y-auto p-4">
       <slot {param} />
     </div>
   </div>
