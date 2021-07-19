@@ -6,8 +6,15 @@
   export let title = '';
   export let backdrop;
   export let classes = '';
-  export const open = (_param = undefined) => {
-    param = _param;
+  export const open = (event, _param = undefined) => {
+    let p = _param;
+    if (event instanceof MouseEvent) {
+      event.stopPropagation();
+    } else if (event && !_param) {
+      p = event;
+    }
+
+    param = p;
     _open = true;
     backdrop.open();
   }
