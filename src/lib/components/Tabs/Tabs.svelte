@@ -5,6 +5,8 @@
 <script lang="ts">
   import { setContext, onDestroy } from 'svelte';
   import { writable } from 'svelte/store';
+  import {createEventDispatcher} from 'svelte';
+  const dispatch = createEventDispatcher();
 
   export type TailwindClass = string;
   export let width: TailwindClass = 'w-full';
@@ -41,6 +43,9 @@
       const i = tabs.indexOf(tab);
       selectedTab.set(tab);
       selectedPanel.set(panels[i]);
+
+      // dispatch!
+      dispatch('selectTab', tabs[i]);
     },
 
     selectedTab,
