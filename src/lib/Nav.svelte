@@ -20,6 +20,7 @@
 			<ul>
 				<li><a href="/examples/backdrop-example">Backdrop / Modal</a></li>
 				<li><a href="/examples/tabs-example">Tabs</a></li>
+				<li><a href="/examples/swipe-action-list">Swipe Action List</a></li>
 			</ul>
 		</li>
 
