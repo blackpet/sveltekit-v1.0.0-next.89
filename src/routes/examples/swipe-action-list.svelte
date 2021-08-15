@@ -1,12 +1,20 @@
 <script>
   import SwipeActionButtonItem from "$lib/components/List/SwipeActionButtonItem.svelte";
+
+  const list = ['List 1', 'List 2', 'List 3', 'List 4', ]
+
+  function deleteItem(item) {
+    console.log(`${item} deleted!!!`);
+  }
 </script>
 <div class="container">
   <ul>
-    <SwipeActionButtonItem>List 1</SwipeActionButtonItem>
-    <SwipeActionButtonItem>List 2</SwipeActionButtonItem>
-    <SwipeActionButtonItem>List 3</SwipeActionButtonItem>
-    <SwipeActionButtonItem>List 4</SwipeActionButtonItem>
+    {#each list as item}
+      <SwipeActionButtonItem
+              on:delete={() => deleteItem(item)}>
+        {item}
+      </SwipeActionButtonItem>
+    {/each}
   </ul>
 </div>
 
