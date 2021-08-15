@@ -1,5 +1,5 @@
 
-export function clickOutside(node, {enabled: initialEnabled, cb}) {
+export function clickOutside(node, {enabled: initialEnabled = true, cb}) {
   const handleOutsideClick = ({target}) => {
     if(!node.contains(target)) {
       cb();
