@@ -1,7 +1,7 @@
 <script>
   import SwipeActionButtonItem from "$lib/components/List/SwipeActionButtonItem.svelte";
 
-  const list = ['List 1', 'List 2', 'List 3', 'List 4', ]
+  const list = Array.from({length: 30}).map((_, i) => `List ${i}`);
 
   function deleteItem(item) {
     console.log(`${item} deleted!!!`);

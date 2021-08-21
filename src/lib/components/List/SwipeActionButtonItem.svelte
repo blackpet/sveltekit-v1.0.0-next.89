@@ -8,7 +8,7 @@
   let dragging = false;
   let actionReady = false;
   let animationId;
-  let pos = {x0: 0, current: 0};
+  let pos = {x0: 0, y0: 0, current: 0};
   let item; // element itself
 
   function swipe(el) {
@@ -45,7 +45,8 @@
 
   function dragStart(e) {
     dragging = true;
-    pos.x0 = getPositionX(e);
+    const [x0, y0] = getPosition(e);
+    pos = {...pos, x0, y0};
     animationId = requestAnimationFrame(animation);
   }
   function animation() {
@@ -55,11 +56,14 @@
 
   function drag(e) {
     if (dragging) {
-      const x = getPositionX(e);
+      const [x, y] = getPosition(e);
 
+      const moveByX = x - pos.x0;
+      const moveByY = y - pos.y0;
       // accept swipe right to left
-      const moveBy = x - pos.x0;
-      if(moveBy > 0) return;
+      if(moveByX > 0) return;
+      // accept swipe horizontal
+      if(moveByX*moveByX < moveByY*moveByY) return;
 
       pos.current = x - pos.x0;
     }
@@ -87,10 +91,10 @@
     }
   }
 
-  function getPositionX(e) {
+  function getPosition(e) {
     return e.type.includes('mouse') ?
-      e.clientX :
-      e.touches[0].clientX;
+      [e.clientX, e.clientY] :
+      [e.touches[0].clientX, e.touches[0].clientY];
   }
   function setItemPositionX() {
     item.style.transform = `translateX(${pos.current}px)`;
