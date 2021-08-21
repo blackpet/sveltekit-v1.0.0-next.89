@@ -2,6 +2,9 @@
   import {fly} from 'svelte/transition';
   import {clickOutside} from "../../actions";
   import Backdrop from './Backdrop.svelte';
+  import {createEventDispatcher} from 'svelte';
+
+  const dispatch = createEventDispatcher();
 
   export let title = '';
   export let backdrop;
@@ -17,10 +20,14 @@
     param = p;
     _open = true;
     backdrop.open();
+
+    dispatch('open');
   }
   export const close = () => {
     _open = false;
     backdrop.close();
+
+    dispatch('close');
   }
 
   let param;
